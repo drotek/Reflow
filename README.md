@@ -1,4 +1,4 @@
 Reflow
 ======
 
-You've always dreamed of designing your boards using SMD components? You want to enter the world of microcontrollers and ICs in QFP, LGA, LQFP, TQFP, SOIC, SOT or BGA package ...?Reflow soldering is a process in which a solder paste (a sticky mixture of powdered solder and flux) is used to temporarily attach one or several electrical components to their contact pads, after which the entire assembly is subjected to controlled heat, which melts the solder, permanently connecting the joint. Heating may be accomplished by passing the assembly through a reflow oven or under an infrared lamp or by soldering individual joints with a hot air pencil.Reflow soldering is the most common method of attaching surface mount components to a circuit board. The goal of the reflow process is to melt the solder and heat the adjoining surfaces, without overheating and damaging the electrical components. In the conventional reflow soldering process, there are usually four stages, called "zones", each having a distinct thermal profile: preheat, thermal soak (often shortened to just soak), reflow, and cooling.
+In progress...
