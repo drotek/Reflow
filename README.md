@@ -13,3 +13,4 @@ Then, the cooling of the board can begin. After a few minutes, your components w
 Runs on a freescale's microcontroller with boot loader pre-loaded and the system code.
 However, you can create the control system yourself and control the LCD, read the buttons and temperature, control the leds, debugging output via USB connector and toggle the power relay. 
 An app is included with this kit to visualize the curve of the oven temperature in real time (USB).
+aa
