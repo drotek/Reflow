@@ -41,3 +41,23 @@ void Buzzer_off()
   digitalWrite(BUZZER, LOW);
 }
 
+
+/****************************************/
+/*            Buzzer_test()             */
+/****************************************/         
+void Buzzer_test()
+{
+  GLCD.ClearScreen();
+  GLCD.CursorToXY(2,25);
+  GLCD.print("Press right button");
+  GLCD.CursorToXY(2,35);
+  GLCD.print("to test Buzzer");
+  while(digitalRead(RIGHT) != 0);
+  
+  GLCD.ClearScreen();
+  Buzzer_on();
+  delay(3000);
+  Buzzer_off();
+  GLCD.ClearScreen();
+}
+

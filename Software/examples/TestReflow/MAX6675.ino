@@ -85,3 +85,27 @@ float MAX6675_read_temp(int samples)
     return temp; 
   }
 }
+
+/****************************************/
+/*           MAX6675_test()             */
+/****************************************/
+void MAX6675_test()
+{
+  GLCD.ClearScreen();
+  GLCD.CursorToXY(2,25);
+  GLCD.print("Press DOWN button");
+  GLCD.CursorToXY(2,35);
+  GLCD.print("to test MAX6675");
+  while(digitalRead(DOWN) != 0);
+  GLCD.ClearScreen();
+  
+  for (int i=0; i <= 30; i++){
+    temperature = MAX6675_read_temp(5);
+    GLCD.CursorToXY(2,25);
+    GLCD.print("Are you cold? :)");
+    GLCD.CursorToXY(2,45);
+    GLCD.print(temperature);
+    delay(250);
+    GLCD.ClearScreen();
+  }
+}

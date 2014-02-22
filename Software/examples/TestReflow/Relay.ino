@@ -40,3 +40,23 @@ void Relay_off()
 {
   digitalWrite(RELAY, LOW);
 }
+
+
+/****************************************/
+/*            Relay_test()              */
+/****************************************/         
+void Relay_test()
+{
+  GLCD.ClearScreen();
+  GLCD.CursorToXY(2,25);
+  GLCD.print("Press TOP button");
+  GLCD.CursorToXY(2,35);
+  GLCD.print("to test RELAY");
+  while(digitalRead(UP) != 0);
+  
+  GLCD.ClearScreen();
+  Relay_on();
+  delay(3000);
+  Relay_off();
+  GLCD.ClearScreen();
+}

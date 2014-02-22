@@ -9,7 +9,7 @@
 *
 * @license    The GNU Public License (GPL) Version 3
 *
-* @Changelog  xx-xx-2014 - ...
+* @Changelog  xx-xx-2014 - ....
 *
 *****************************************************************************/
 
@@ -42,11 +42,11 @@ int TEMP = 200;
 
 
 /****************************************/
-/*           Initialization             */
+/*                SETUP                 */
 /****************************************/
 void setup(){
   
-  
+  /* Initialization of all devices */  
   MAX6675_init();
   Button_init();
   Relay_init();
@@ -75,6 +75,8 @@ begin:
   GLCD.CursorToXY(2,5);
   GLCD.print("Hello, welcome to the Reflow test v1, open the graphic interface please, OK to continue");
   while(digitalRead(OK) != 0);
+  
+  /**** Test of EEPROM ****/
   GLCD.ClearScreen();
   GLCD.CursorToXY(2,25);
   GLCD.print("Press left button");
@@ -99,43 +101,21 @@ begin:
   
   delay(1000);
   GLCD.ClearScreen();
-  GLCD.CursorToXY(2,25);
-  GLCD.print("Press right button");
-  GLCD.CursorToXY(2,35);
-  GLCD.print("to test FAN");
-  while(digitalRead(RIGHT) != 0);
-  GLCD.ClearScreen();
-  digitalWrite(FAN, HIGH);
-  delay(3000);
-  digitalWrite(FAN, LOW);
-  GLCD.ClearScreen();
-  GLCD.CursorToXY(2,25);
-  GLCD.print("Press TOP button");
-  GLCD.CursorToXY(2,35);
-  GLCD.print("to test RELAY");
-  while(digitalRead(UP) != 0);
-  GLCD.ClearScreen();
-  digitalWrite(RELAY, HIGH);
-  delay(3000);
-  digitalWrite(RELAY, LOW);
-  GLCD.ClearScreen();
-  GLCD.CursorToXY(2,25);
-  GLCD.print("Press DOWN button");
-  GLCD.CursorToXY(2,35);
-  GLCD.print("to test MAX6675");
-  while(digitalRead(DOWN) != 0);
-  GLCD.ClearScreen();
   
-  for (int i=0; i <= 30; i++){
-    temperature = MAX6675_read_temp(5);
-    GLCD.CursorToXY(2,25);
-    GLCD.print("Are you cold? :)");
-    GLCD.CursorToXY(2,45);
-    GLCD.print(temperature);
-    delay(250);
-    GLCD.ClearScreen();
-  }
+  /** Test of LED and fan outputs **/ 
+  Fan_test();
+ 
+  /** Test of LED and relay outputs **/ 
+  Relay_test();
   
+  /**** Test of buzzer ****/ 
+  Buzzer_test();
+  
+  /*** Test of MAX6675 IC ***/ 
+  MAX6675_test();
+  
+  
+  /* Test of USB communication */ 
   GLCD.CursorToXY(2,25);
   GLCD.print("Press OK button");
   GLCD.CursorToXY(2,35);
