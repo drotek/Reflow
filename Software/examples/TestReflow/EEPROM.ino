@@ -1,8 +1,8 @@
 /******************************************************************************
 *
-* @file       Buzzer.ino
+* @file       EEPROM.ino
 * @author     E.Esquirol, http://www.drotek.fr Copyright (C) 2014.
-* @brief      Library for using the buzzer
+* @brief      Library for using the EEPROM
 *
 *             Products: http://www.drotek.fr/shop/en/5-controleur-refusion
 *             Discussions: http://www.drotek.fr/forum
@@ -13,51 +13,38 @@
 *
 *****************************************************************************/
 
-
-/****************************************/
-/*            Buzzer_init()             */
-/****************************************/         
-void Buzzer_init()
-{
-  digitalWrite(BUZZER, LOW);
-  pinMode(BUZZER, OUTPUT);   
-}
-   
-         
-/****************************************/
-/*            Buzzer_on()               */
-/****************************************/         
-void Buzzer_on()
-{
-  digitalWrite(BUZZER, HIGH);
-}
+int value = 200;
+int address = 10;
 
 
 /****************************************/
-/*            Buzzer_off()              */
+/*            EEPROM_test()             */
 /****************************************/         
-void Buzzer_off()
+void EEPROM_test()
 {
-  digitalWrite(BUZZER, LOW);
-}
-
-
-/****************************************/
-/*            Buzzer_test()             */
-/****************************************/         
-void Buzzer_test()
-{
+  EEPROM.write(address, value);
+    
   GLCD.ClearScreen();
   GLCD.CursorToXY(2,25);
-  GLCD.print("Press right button");
+  GLCD.print("Press left button");
   GLCD.CursorToXY(2,35);
-  GLCD.print("to test Buzzer");
-  while(digitalRead(RIGHT) != 0);
-  
+  GLCD.print("to test EEPROM");
+  while(digitalRead(LEFT) != 0);
   GLCD.ClearScreen();
-  Buzzer_on();
-  delay(3000);
-  Buzzer_off();
+  delay(100);
+  
+  value = EEPROM.read(address);
+  
+  if (EEPROM.read(address) == value){
+    GLCD.CursorToXY(2,25);
+    GLCD.print("EEPROM OK");
+  }
+  else{
+    GLCD.CursorToXY(2,25);
+    GLCD.print("EEPROM ERROR");
+  }
+  
+  delay(4000);
   GLCD.ClearScreen();
 }
 

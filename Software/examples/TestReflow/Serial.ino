@@ -1,8 +1,8 @@
 /******************************************************************************
 *
-* @file       EEPROM.ino
+* @file       Serial.ino
 * @author     E.Esquirol, http://www.drotek.fr Copyright (C) 2014.
-* @brief      Library for using the EEPROM
+* @brief      Library for testing USB communication
 *
 *             Products: http://www.drotek.fr/shop/en/5-controleur-refusion
 *             Discussions: http://www.drotek.fr/forum
@@ -13,38 +13,27 @@
 *
 *****************************************************************************/
 
-int value = 200;
-int address = 10;
-
 
 /****************************************/
-/*            EEPROM_test()             */
+/*            Serial_test()             */
 /****************************************/         
-void EEPROM_test()
+void Serial_test()
 {
-  EEPROM.write(address, value);
-    
-  GLCD.ClearScreen();
   GLCD.CursorToXY(2,25);
-  GLCD.print("Press left button");
+  GLCD.print("Press OK button");
   GLCD.CursorToXY(2,35);
-  GLCD.print("to test EEPROM");
-  while(digitalRead(LEFT) != 0);
+  GLCD.print("to test USB port");
+  while(digitalRead(OK) != 0);
+  
   GLCD.ClearScreen();
-  delay(100);
-  
-  value = EEPROM.read(address);
-  
-  if (EEPROM.read(address) == value){
-    GLCD.CursorToXY(2,25);
-    GLCD.print("EEPROM OK");
-  }
-  else{
-    GLCD.CursorToXY(2,25);
-    GLCD.print("EEPROM ERROR");
+  GLCD.CursorToXY(2,35);
+  GLCD.print("Check the monitor");
+  delay(1000);
+    
+  for (int i=0; i <= 5; i++){
+    Serial.print("It is work!      ");
+    delay(500);
   }
   
-  delay(4000);
-  GLCD.ClearScreen();
 }
 

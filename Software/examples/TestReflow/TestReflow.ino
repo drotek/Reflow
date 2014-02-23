@@ -29,22 +29,15 @@
 /****************************************/
 /*              Variables               */
 /****************************************/
-Image_t icon;
-
-unsigned long startMillis;
-unsigned int  loops = 0;
-unsigned int  iter = 0;
-int  theDelay = 20; 
-int val = 0;
-                 
-float temperature = 0.0; 
-int TEMP = 200;
 
 
 /****************************************/
 /*                SETUP                 */
 /****************************************/
 void setup(){
+  
+  /* Open a serial communication */ 
+  Serial.begin(9600);
   
   /* Initialization of all devices */  
   MAX6675_init();
@@ -54,14 +47,9 @@ void setup(){
   Buzzer_init();  
   GLCD.Init();
   
-  EEPROM.write(0,TEMP);
-  
-  icon = ArduinoIcon64x64;
+  /* Confi of LCD */ 
   GLCD.ClearScreen(); 
-  GLCD.SelectFont(System5x7, BLACK);
-  delay(100);
-  //intro(10);
-  Serial.begin(9600);
+  GLCD.SelectFont(System5x7, BLACK); 
 }
   
 
@@ -70,37 +58,12 @@ void setup(){
 /****************************************/
 void loop(){
   
-  TEMP = TEMP + 10;
-begin:
   GLCD.CursorToXY(2,5);
-  GLCD.print("Hello, welcome to the Reflow test v1, open the graphic interface please, OK to continue");
+  GLCD.print("Hello, welcome to the Reflow controller test, open the graphic interface please, OK to continue");
   while(digitalRead(OK) != 0);
   
   /**** Test of EEPROM ****/
-  GLCD.ClearScreen();
-  GLCD.CursorToXY(2,25);
-  GLCD.print("Press left button");
-  GLCD.CursorToXY(2,35);
-  GLCD.print("to test EEPROM");
-  while(digitalRead(LEFT) != 0);
-  GLCD.ClearScreen();
-  GLCD.print(TEMP);
-  delay(100);
-  GLCD.ClearScreen();
-  
-  if (TEMP = 210){
-    GLCD.CursorToXY(2,25);
-    GLCD.print("EEPROM OK");
-  }
-  
-  if (TEMP != 210){
-    GLCD.CursorToXY(2,25);
-    GLCD.print("EEPROM ERROR");
-    delay(5000);
-  }
-  
-  delay(1000);
-  GLCD.ClearScreen();
+  EEPROM_test();
   
   /** Test of LED and fan outputs **/ 
   Fan_test();
@@ -113,23 +76,10 @@ begin:
   
   /*** Test of MAX6675 IC ***/ 
   MAX6675_test();
-  
-  
+   
   /* Test of USB communication */ 
-  GLCD.CursorToXY(2,25);
-  GLCD.print("Press OK button");
-  GLCD.CursorToXY(2,35);
-  GLCD.print("to test USB port");
-  while(digitalRead(OK) != 0);
-  GLCD.ClearScreen();
-  GLCD.CursorToXY(2,35);
-  GLCD.print("Check the monitor");
-  delay(1000);
-    
-  for (int i=0; i <= 5; i++){
-    Serial.print("It is work!      ");
-    delay(500);
-  }
+  Serial_test();
+  
   
   GLCD.ClearScreen();
   GLCD.CursorToXY(2,25);
