@@ -1,4 +1,4 @@
-.mine
+..mine
 Reflow
 ======
 
