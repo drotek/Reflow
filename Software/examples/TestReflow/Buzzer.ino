@@ -53,11 +53,11 @@ void Buzzer_test()
   GLCD.CursorToXY(2,35);
   GLCD.print("to test Buzzer");
   while(digitalRead(RIGHT) != 0);
-  
   GLCD.ClearScreen();
+  for (int i=20; i <= 40; i++){
   Buzzer_on();
-  delay(3000);
+  delay(100);
   Buzzer_off();
-  GLCD.ClearScreen();
+  delay(i);}
 }
 
