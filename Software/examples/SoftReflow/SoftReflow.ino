@@ -70,7 +70,7 @@ void setup(){
 
   //Transferts EEPROM values to RAM
   EEPROMtoRAM();  
-   
+  GLCD.ClearScreen();
   intro(10); // Introduction
 }
 
