@@ -71,7 +71,7 @@ void setup(){
   //Transferts EEPROM values to RAM
   EEPROMtoRAM();  
    
-  //intro(10); // Introduction
+  intro(10); // Introduction
 }
 
 
